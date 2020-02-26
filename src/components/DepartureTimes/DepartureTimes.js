@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../App.css";
 import logo from "../../logo.svg";
 import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
+import {API_URL} from '../../constants/appConfig'
 
 const DepartureTimes = props => {
   const [userLocation, setUserLocation] = useState({lat: 51.5074, lng: 0.1278});
@@ -38,11 +39,12 @@ const DepartureTimes = props => {
           style={mapStyles}
           center={userLocation}
         />
+        {console.log(API_URL)}
       </header>
     </div>
   );
 };
 
 export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_MAPS_API_KEY
+  apiKey: API_URL
 })(DepartureTimes);
