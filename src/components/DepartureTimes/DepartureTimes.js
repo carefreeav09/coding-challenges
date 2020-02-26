@@ -44,5 +44,5 @@ const DepartureTimes = props => {
 };
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyDKtC9_Vs1OZUSkjuUlL8OsWjPnqgXmyp0"
+  apiKey: process.env.GOOGLE_MAPS_API_KEY
 })(DepartureTimes);
