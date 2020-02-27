@@ -1,6 +1,5 @@
 import loadable from 'react-loadable';
 import LoadingComponent from '../../layout/loading';
-import layout from '../../layout/layout'
 
 export const AsycnAppLayout = loadable({
     loader: () => import('../../layout/layout'),
@@ -14,5 +13,10 @@ export const AsyncHome = loadable({
 
 export const AysncDepartureTimes = loadable({
     loader: () => import('../../components/DepartureTimes'),
+    loading: LoadingComponent
+})
+
+export const AsyncSAnFransiscoMovies = loadable({
+    loader: () => import('../../components/SanFransiscoMovies'),
     loading: LoadingComponent
 })

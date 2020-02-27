@@ -36,6 +36,11 @@ code {
   position: relative !important;
 }
 
+.card-img-top{
+  height: 200px;
+  width: auto;
+}
+
 /* Colors */
 .black-text{
   color: black !important;
