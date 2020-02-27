@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/coding-challenges/static/css/main.36411e38.chunk.css",
+    "main.js": "/coding-challenges/static/js/main.8d1ca97d.chunk.js",
+    "main.js.map": "/coding-challenges/static/js/main.8d1ca97d.chunk.js.map",
+    "runtime-main.js": "/coding-challenges/static/js/runtime-main.5c136375.js",
+    "runtime-main.js.map": "/coding-challenges/static/js/runtime-main.5c136375.js.map",
+    "static/js/2.6f8a9940.chunk.js": "/coding-challenges/static/js/2.6f8a9940.chunk.js",
+    "static/js/2.6f8a9940.chunk.js.map": "/coding-challenges/static/js/2.6f8a9940.chunk.js.map",
+    "static/css/3.47e06e2e.chunk.css": "/coding-challenges/static/css/3.47e06e2e.chunk.css",
+    "static/js/3.4bde2c3a.chunk.js": "/coding-challenges/static/js/3.4bde2c3a.chunk.js",
+    "static/js/3.4bde2c3a.chunk.js.map": "/coding-challenges/static/js/3.4bde2c3a.chunk.js.map",
+    "static/js/4.9b91bc2b.chunk.js": "/coding-challenges/static/js/4.9b91bc2b.chunk.js",
+    "static/js/4.9b91bc2b.chunk.js.map": "/coding-challenges/static/js/4.9b91bc2b.chunk.js.map",
+    "static/js/5.7c3d9a0f.chunk.js": "/coding-challenges/static/js/5.7c3d9a0f.chunk.js",
+    "static/js/5.7c3d9a0f.chunk.js.map": "/coding-challenges/static/js/5.7c3d9a0f.chunk.js.map",
+    "index.html": "/coding-challenges/index.html",
+    "precache-manifest.8cdba55c2784ab1e40e21ffc402360f1.js": "/coding-challenges/precache-manifest.8cdba55c2784ab1e40e21ffc402360f1.js",
+    "service-worker.js": "/coding-challenges/service-worker.js",
+    "static/css/3.47e06e2e.chunk.css.map": "/coding-challenges/static/css/3.47e06e2e.chunk.css.map",
+    "static/css/main.36411e38.chunk.css.map": "/coding-challenges/static/css/main.36411e38.chunk.css.map",
+    "static/js/2.6f8a9940.chunk.js.LICENSE.txt": "/coding-challenges/static/js/2.6f8a9940.chunk.js.LICENSE.txt",
+    "static/js/3.4bde2c3a.chunk.js.LICENSE.txt": "/coding-challenges/static/js/3.4bde2c3a.chunk.js.LICENSE.txt",
+    "static/media/nucleo-icons.css": "/coding-challenges/static/media/nucleo-icons.f82ec6ba.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5c136375.js",
+    "static/css/3.47e06e2e.chunk.css",
+    "static/js/3.4bde2c3a.chunk.js",
+    "static/css/main.36411e38.chunk.css",
+    "static/js/main.8d1ca97d.chunk.js"
+  ]
+}
