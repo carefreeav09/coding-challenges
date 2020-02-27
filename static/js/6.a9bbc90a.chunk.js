@@ -1,2 +1,0 @@
-(this.webpackJsonpcodingchallenges=this.webpackJsonpcodingchallenges||[]).push([[6],{94:function(n,e,c){"use strict";c.r(e);var t=c(0),s=c.n(t),a=function(){return s.a.createElement("div",null)};e.default=a}}]);
-//# sourceMappingURL=6.a9bbc90a.chunk.js.map
