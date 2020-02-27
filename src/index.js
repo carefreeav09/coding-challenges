@@ -10,7 +10,7 @@ import App from "./container/App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <Router>
+  <Router basename='/coding-challenges'>
     <App />
   </Router>,
   document.getElementById("root")

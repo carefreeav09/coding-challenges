@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SanFranMovies = () => {
+const MoviesMaps = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const SanFranMovies = () => {
     )
 }
 
-export default SanFranMovies
+export default MoviesMaps

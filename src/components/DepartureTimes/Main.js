@@ -16,7 +16,10 @@ const MainDepartureComponent = () => {
       .get(
         "http://webservices.nextbus.com/service/publicJSONFeed?command=agencyList"
       )
-      .then(response => {setAgencyList(response.data.agency); setLoading(false)})
+      .then(response => {
+        setAgencyList(response.data.agency);
+        setLoading(false);
+      })
       .catch(error => console.log(error));
 
     return () => {};
@@ -24,19 +27,31 @@ const MainDepartureComponent = () => {
 
   const handleAgencySelect = event => {
     setLoading(true);
-      axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=${event.target.value}`)
-      .then(response => {setRoutesList(response.data.route);setLoading(false)})
-  }
+    axios
+      .get(
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=${event.target.value}`
+      )
+      .then(response => {
+        setRoutesList(response.data.route);
+        setLoading(false);
+      });
+  };
 
   const handleRoutesSelect = event => {
     setLoading(true);
     let agency = getValues()?.agency;
-    axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${event.target.value}&t=0`)
-    .then(response => {setVehiclesList(response.data.vehicle);setLoading(false)})
-  }
+    axios
+      .get(
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${event.target.value}&t=0`
+      )
+      .then(response => {
+        setVehiclesList(response.data.vehicle);
+        setLoading(false);
+      });
+  };
 
   return (
-    <div className='gradient-background-black'>
+    <div className="gradient-background-black">
       <div className="container py-5">
         <div className="card p-3 mb-3">
           <h3>Departure Times</h3>
@@ -85,7 +100,9 @@ const MainDepartureComponent = () => {
                   >
                     {agencyList instanceof Array &&
                       agencyList.map(item => (
-                      <option key={item.tag} value={item.tag}>{item.title}</option>
+                        <option key={item.tag} value={item.tag}>
+                          {item.title}
+                        </option>
                       ))}{" "}
                   </select>
 
@@ -111,7 +128,9 @@ const MainDepartureComponent = () => {
                   >
                     {routesList instanceof Array &&
                       routesList.map(item => (
-                      <option key={item.tag} value={item.tag}>{item.title}</option>
+                        <option key={item.tag} value={item.tag}>
+                          {item.title}
+                        </option>
                       ))}{" "}
                   </select>
 

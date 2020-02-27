@@ -1,3 +1,3 @@
-import SanFransiscoMovies from './SanFranMovies';
+import SanFransiscoMovies from './Main';
 
 export default SanFransiscoMovies;
