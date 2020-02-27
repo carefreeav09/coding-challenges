@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "../../App.css";
-import logo from "../../logo.svg";
-import { Map, GoogleApiWrapper, Marker} from "google-maps-react";
-import {API_URL} from '../../constants/appConfig'
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { API_URL, SAN_FRANSISCO_LAT_LNG } from "../../constants/appConfig";
+
+const CustomMarkers = () => <div>Text</div>;
 
 const DepartureTimes = props => {
-  const [userLocation, setUserLocation] = useState({lat: 51.5074, lng: 0.1278});
+  const { vehicles } = props;
+  const [userLocation, setUserLocation] = useState(SAN_FRANSISCO_LAT_LNG);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -16,7 +17,7 @@ const DepartureTimes = props => {
   };
 
   const showPosition = position => {
-    setUserLocation({lat: 51.5074, lng: 0.1278});
+    setUserLocation(SAN_FRANSISCO_LAT_LNG);
   };
 
   useEffect(() => {
@@ -26,22 +27,35 @@ const DepartureTimes = props => {
 
   const mapStyles = {
     width: "100%",
-    height: "100%"
+    height: "60vh"
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Map
-          google={props.google}
-          zoom={11}
-          style={mapStyles}
-          center={userLocation}
-        />
-        {console.log(API_URL)}
-      </header>
-    </div>
+    <Map
+      className="map-style"
+      google={props.google}
+      zoom={13}
+      style={mapStyles}
+      center={userLocation}
+    >
+      {vehicles &&
+        vehicles.length > 0 &&
+        vehicles.map(item => (
+          <Marker
+            key={item.id}
+            title={item.id}
+            name={item.id}
+            icon={{
+              url: "https://image.flaticon.com/icons/png/512/171/171255.png",
+              anchor: new props.google.maps.Point(32,32),
+              scaledSize: new props.google.maps.Size(32,32)
+            }}
+            position={{ lat: item.lat, lng: item.lon }}
+          />
+        ))}
+
+      <Marker name={"Current location"} />
+    </Map>
   );
 };
 

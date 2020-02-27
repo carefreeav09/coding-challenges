@@ -1,12 +1,13 @@
 import React from "react";
+import {withRouter, Link} from 'react-router-dom'
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg stylish-color-dark">
       <div className="container">
-        <a className="navbar-brand" href="#">
+        <Link to='/' className="navbar-brand">
           Coding Challenges
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,7 +23,7 @@ const Header = () => {
           <div className="navbar-collapse-header">
             <div className="row">
               <div className="col-6 collapse-brand">
-                <a href="javascript:void(0)">
+                <a>
                   <img src="../../assets/img/brand/blue.png" />
                 </a>
               </div>
@@ -91,4 +92,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

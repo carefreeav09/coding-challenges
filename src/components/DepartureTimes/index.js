@@ -1,3 +1,3 @@
-import DepartureTimes from './DepartureTimes';
+import MainDepartureComponent from './Main';
 
-export default DepartureTimes;
+export default MainDepartureComponent;
