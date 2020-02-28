@@ -9,6 +9,7 @@ const MainDepartureComponent = () => {
   const [agencyList, setAgencyList] = useState([]);
   const [vehiclesList, setVehiclesList] = useState([]);
   const [stopsList, setStopsList] = useState([]);
+  const [prediction, setPrediction] = useState();
   const [pathList, setPathList] = useState([]);
   const [routesList, setRoutesList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,12 +49,8 @@ const MainDepartureComponent = () => {
       )
       .then(response => {
         setStopsList(response.data.route.stop);
-        setPathList(response.data.route.path);
         setLoading(false);
       });
-
-      axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${event.target.value}&t=0`)
-      .then(response => {console.log(response.data);setVehiclesList(response.data.vehicle)})
 
   };
 
@@ -61,12 +58,31 @@ const MainDepartureComponent = () => {
     setLoading(true);
     let agency = getValues()?.agency;
     let routes = getValues()?.routes;
-    axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=${agency}&stopId=${event.target.value}&routeTag=${routes}`)
-    .then(
-      response => {console.log(response);setLoading(false)}
-    );
+    axios
+      .get(
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=${agency}&stopId=${event.target.value}&routeTag=${routes}`
+      )
+      .then(response => {
+        setPrediction(response.data.predictions);
+        setLoading(false);
+      });
+      
+    axios
+      .get(
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=routeConfig&a=${agency}&r=${routes}&stopId=${event.target.value}`
+      )
+      .then(response => {
+        setPathList(response.data.route.path);
+      });
 
-  }
+      axios
+      .get(
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${routes}&t=0`
+      )
+      .then(response => {
+        setVehiclesList(response.data.vehicle);
+      });
+  };
 
   return (
     <div className="gradient-background-black">
@@ -114,7 +130,7 @@ const MainDepartureComponent = () => {
                     aria-describedby="agencyHelp"
                     placeholder="Select your preferred agency"
                     ref={register({ required: true })}
-                    defaultValue='-'
+                    defaultValue="-"
                     onChange={handleAgencySelect}
                   >
                     {agencyList instanceof Array &&
@@ -143,7 +159,7 @@ const MainDepartureComponent = () => {
                     placeholder="Select your preferred routes"
                     ref={register({ required: true })}
                     disabled={loading}
-                    defaultValue='-'
+                    defaultValue="-"
                     onChange={handleRoutesSelect}
                   >
                     <option key={"-"} value={"-"}>
@@ -162,7 +178,7 @@ const MainDepartureComponent = () => {
                   </small>
                 </div>
               </div>
-            
+
               <div className="col">
                 <div className="form-group">
                   <label htmlFor="stops" className="black-text">
@@ -175,7 +191,7 @@ const MainDepartureComponent = () => {
                     placeholder="Select your preferred stops"
                     ref={register({ required: true })}
                     disabled={loading}
-                    defaultValue='-'
+                    defaultValue="-"
                     onChange={handleStopsSelect}
                   >
                     <option key={"-"} value={"-"}>
@@ -194,12 +210,11 @@ const MainDepartureComponent = () => {
                   </small>
                 </div>
               </div>
-            
             </div>
           </form>
         </div>
 
-        <DepartureTimes vehicles={vehiclesList} path={pathList} />
+        <DepartureTimes vehicles={vehiclesList} path={pathList} prediction={prediction}/>
       </div>
     </div>
   );
