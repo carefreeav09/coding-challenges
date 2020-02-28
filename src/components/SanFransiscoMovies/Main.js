@@ -1,12 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
 
 const Main = () => {
   const { register, handleSubmit, getValues } = useForm();
-
-  const state = { options: ["apple", "apricot", "banana", "carror"] };
 
   const locationsArrays = [
     {
@@ -56,7 +55,10 @@ const Main = () => {
     }
   ];
 
-  console.log(locationsArrays.map(item => item.title))
+  const onSubmit = values => {
+    console.log(values);
+  };
+
   return (
     <div className="gradient-background-black">
       <div className="container py-5">
@@ -69,28 +71,57 @@ const Main = () => {
             autocompletion search.
           </h6>
 
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <h4>Search for the movies </h4>
             <div className="row">
-              <div className="col">
+              <div className="col-5">
                 <div className="form-group">
                   <label htmlFor="location" className="black-text">
-                    Location
+                    Search by Location
                   </label>
 
                   <TextInput
                     options={locationsArrays.map(item => item.title)}
-                    trigger={''}
+                    trigger={""}
                     name="location"
                     className="form-control"
                     aria-describedby="locationHelp"
                     placeholder="Select your preferred location"
                     ref={register({ required: true })}
-                    onInput={(event) => console.log(event.target.value)}
                   />
+
                   <small id="locationHelp" className="form-text text-muted">
-                    Choose the location you are in.
+                    Choose the location in San Fransisco
                   </small>
                 </div>
+              </div>
+
+              <div className="col-5">
+                <div className="form-group">
+                  <label htmlFor="movie" className="black-text">
+                    Search by Movie name
+                  </label>
+
+                  <TextInput
+                    // options={moviesArrays.map(item => item.title)}
+                    trigger={""}
+                    name="movie"
+                    className="form-control"
+                    aria-describedby="movieHelp"
+                    placeholder="Select your preferred movie"
+                    ref={register({ required: true })}
+                  />
+
+                  <small id="movieHelp" className="form-text text-muted">
+                    Choose the movie
+                  </small>
+                </div>
+              </div>
+
+              <div className="col-2">
+                <button type="submit" className="btn btn-dark mt-5">
+                  Submit
+                </button>
               </div>
             </div>
           </form>

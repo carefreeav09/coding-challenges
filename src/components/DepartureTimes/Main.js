@@ -8,6 +8,8 @@ const MainDepartureComponent = () => {
   const { register, handleSubmit, getValues } = useForm();
   const [agencyList, setAgencyList] = useState([]);
   const [vehiclesList, setVehiclesList] = useState([]);
+  const [stopsList, setStopsList] = useState([]);
+  const [pathList, setPathList] = useState([]);
   const [routesList, setRoutesList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -42,13 +44,29 @@ const MainDepartureComponent = () => {
     let agency = getValues()?.agency;
     axios
       .get(
-        `http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${event.target.value}&t=0`
+        `http://webservices.nextbus.com/service/publicJSONFeed?command=routeConfig&a=${agency}&r=${event.target.value}`
       )
       .then(response => {
-        setVehiclesList(response.data.vehicle);
+        setStopsList(response.data.route.stop);
+        setPathList(response.data.route.path);
         setLoading(false);
       });
+
+      axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&r=${event.target.value}&t=0`)
+      .then(response => {console.log(response.data);setVehiclesList(response.data.vehicle)})
+
   };
+
+  const handleStopsSelect = event => {
+    setLoading(true);
+    let agency = getValues()?.agency;
+    let routes = getValues()?.routes;
+    axios.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=${agency}&stopId=${event.target.value}&routeTag=${routes}`)
+    .then(
+      response => {console.log(response);setLoading(false)}
+    );
+
+  }
 
   return (
     <div className="gradient-background-black">
@@ -64,7 +82,7 @@ const MainDepartureComponent = () => {
 
           <form>
             <div className="row">
-              <div className="col">
+              <div className="col-12">
                 <div className="form-group">
                   <label htmlFor="location" className="black-text">
                     Location
@@ -96,6 +114,7 @@ const MainDepartureComponent = () => {
                     aria-describedby="agencyHelp"
                     placeholder="Select your preferred agency"
                     ref={register({ required: true })}
+                    defaultValue='-'
                     onChange={handleAgencySelect}
                   >
                     {agencyList instanceof Array &&
@@ -124,8 +143,12 @@ const MainDepartureComponent = () => {
                     placeholder="Select your preferred routes"
                     ref={register({ required: true })}
                     disabled={loading}
+                    defaultValue='-'
                     onChange={handleRoutesSelect}
                   >
+                    <option key={"-"} value={"-"}>
+                      -
+                    </option>
                     {routesList instanceof Array &&
                       routesList.map(item => (
                         <option key={item.tag} value={item.tag}>
@@ -139,11 +162,44 @@ const MainDepartureComponent = () => {
                   </small>
                 </div>
               </div>
+            
+              <div className="col">
+                <div className="form-group">
+                  <label htmlFor="stops" className="black-text">
+                    Stop
+                  </label>
+                  <select
+                    name="stops"
+                    className="form-control"
+                    aria-describedby="stopsHelp"
+                    placeholder="Select your preferred stops"
+                    ref={register({ required: true })}
+                    disabled={loading}
+                    defaultValue='-'
+                    onChange={handleStopsSelect}
+                  >
+                    <option key={"-"} value={"-"}>
+                      -
+                    </option>
+                    {stopsList instanceof Array &&
+                      stopsList.map(item => (
+                        <option key={item.stopId} value={item.stopId}>
+                          {item.title}
+                        </option>
+                      ))}{" "}
+                  </select>
+
+                  <small id="stopsHelp" className="form-text text-muted">
+                    Choose the Routes you are in.
+                  </small>
+                </div>
+              </div>
+            
             </div>
           </form>
         </div>
 
-        <DepartureTimes vehicles={vehiclesList} />
+        <DepartureTimes vehicles={vehiclesList} path={pathList} />
       </div>
     </div>
   );
