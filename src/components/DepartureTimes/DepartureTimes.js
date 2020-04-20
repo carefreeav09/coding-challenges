@@ -33,7 +33,7 @@ const DepartureTimes = props => {
     height: "60vh"
   };
 
-  let newPaths = path.map(item => {
+  let newPaths = path?.map(item => {
     return {
       point: item.point.map(it => {
         return {
@@ -44,7 +44,7 @@ const DepartureTimes = props => {
     };
   });
 
-  let newVehiclePositions = vehicles.map(item => {
+  let newVehiclePositions = vehicles?.map(item => {
     return {
       ...item,
       lng: parseFloat(item.lon),

@@ -12,7 +12,7 @@ export const AsyncHome = loadable({
 })
 
 export const AysncDepartureTimes = loadable({
-    loader: () => import('../../components/DepartureTimes'),
+    loader: () => import('../../components/DepartureTimesNew'),
     loading: LoadingComponent
 })
 

@@ -44,18 +44,6 @@ const Footer = () => {
       </div>
       {/* Footer Challenges */}
       <hr />
-      {/* Call to action */}
-      <ul className="list-unstyled list-inline text-center py-2">
-        <li className="list-inline-item">
-          <h5 className="mb-1">Register for free</h5>
-        </li>
-        <li className="list-inline-item">
-          <a href="#!" className="btn btn-danger btn-rounded">
-            Sign up!
-          </a>
-        </li>
-      </ul>
-      {/* Call to action */}
       <hr />
       {/* Social buttons */}
       <ul className="list-unstyled list-inline text-center">

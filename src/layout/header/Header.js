@@ -3,7 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg stylish-color-dark">
+      <nav className="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar navigation-semi-transparent">
       <div className="container">
         <Link to='/' className="navbar-brand">
           Coding Challenges
